@@ -1,22 +1,28 @@
 package ge.tbc.testautomation.javaoop.runners;
 
-import ge.tbc.testautomation.javaoop.figures.Circle;
-import ge.tbc.testautomation.javaoop.util.Util;
+
+import ge.tbc.testautomation.javaoop.figures.Rectangle;
+import ge.tbc.testautomation.javaoop.figures.Triangle;
+import ge.tbc.testautomation.javaoop.util.HelperFunctions;
 
 public class Main {
     public static void main(String[] args) {
-        double[] radiuss = {11.0, 7.5, 10.2, 12.3, 3.8};
 
-        Circle[] circles = new Circle[radiuss.length];
 
-        for (int i = 0; i < radiuss.length; i++) {
-            circles[i] = new Circle(radiuss[i]);
-            System.out.println("Number of circles: " + Circle.numberOfCircleInstances);
-        }
+        Rectangle rectangle = new Rectangle(11.0, 2.3);
+        System.out.println("Created a rectangle with sides: a = " + rectangle.getA() + " and b = " + rectangle.getB());
+        System.out.println("area = " + rectangle.getArea() + ",  perimeter = " + rectangle.getPerimeter());
+        System.out.println();
 
-        for (Circle circle : circles) {
-            String circleToString = Util.circleToString(circle);
-            System.out.println(circleToString);
-        }
+        Triangle triangle = new Triangle(5.0, 1.7, 5.4, 6.5);
+        System.out.println("Created a triangle with sides: a = "
+                + triangle.getA() + ", b = " + triangle.getB() + ", c = " + triangle.getC());
+        System.out.println("height: " + triangle.getH() + ", area = "
+                + triangle.getArea() + ", perimeter = " + triangle.getPerimeter());
+
+
+        Rectangle rectangle2 = new Rectangle(2.1,8.8);
+        HelperFunctions.compareRectangles(rectangle,rectangle2);
+
     }
 }
