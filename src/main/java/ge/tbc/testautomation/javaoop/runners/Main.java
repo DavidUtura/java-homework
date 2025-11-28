@@ -26,7 +26,12 @@ public class Main {
         Triangle validTriangle = new Triangle(3.7, 5.1, 4, 2.2);
 
 
+
         Triangle validTriangle2 = new Triangle(5.7, 5.1, 4, 3.2);
         System.out.println(validTriangle2.getLength());
+
+        Circle validCircle2 = new Circle(3.2);
+        System.out.println(validCircle2.getArea());
+
     }
 }
