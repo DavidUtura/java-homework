@@ -24,5 +24,9 @@ public class Main {
         System.out.println("--------------");
         Circle validCircle = new Circle(3.7);
         Triangle validTriangle = new Triangle(3.7, 5.1, 4, 2.2);
+
+
+        Triangle validTriangle2 = new Triangle(5.7, 5.1, 4, 3.2);
+        System.out.println(validTriangle2.getLength());
     }
 }
