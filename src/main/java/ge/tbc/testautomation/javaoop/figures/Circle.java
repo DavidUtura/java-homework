@@ -1,46 +1,27 @@
 package ge.tbc.testautomation.javaoop.figures;
 
-import ge.tbc.testautomation.abstractClassesInterfaces.interfaces.IResizable;
-import ge.tbc.testautomation.abstractClassesInterfaces.interfaces.IValidFigure;
-import ge.tbc.testautomation.exceptionsStringOperationsRegex.RadiusException;
-
-public  class Circle extends Figure implements IResizable, IValidFigure {
+public  class Circle implements Comparable<Circle> {
     private double radius;
 
     public Circle(double radius) {
         this.radius = radius;
 
-        if (!validateFigure()) {
-            throw new RadiusException("Radius is invalid");
-        } else System.out.println("Circle is valid");
-    }
-    @Override
-    public double getArea() {
-        return Math.PI * radius * radius;
     }
 
     @Override
-    public double getLength() {
-        return Math.PI * radius * 2;
+    public String toString() {
+        return "Circle radius: " + this.radius;
     }
 
     @Override
-    public void printPackageName() {
-        System.out.println(this.getClass().getPackageName());
+    public int compareTo(Circle otherCircle) {
+        if (this.radius > otherCircle.radius) {
+            return 1;
+        } else if (this.radius < otherCircle.radius) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
     }
 
-    @Override
-    public void doubleSize() {
-        this.radius = radius * 2;
-    }
-
-    @Override
-    public void customSize(double byValue) {
-    this.radius = radius * byValue;
-    }
-
-    @Override
-    public boolean validateFigure() {
-        return this.radius > 0;
-    }
-}
