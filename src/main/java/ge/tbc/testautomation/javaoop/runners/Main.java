@@ -1,32 +1,41 @@
 package ge.tbc.testautomation.javaoop.runners;
 
 
-import ge.tbc.testautomation.exceptionsStringOperationsRegex.RadiusException;
-import ge.tbc.testautomation.exceptionsStringOperationsRegex.TriangleSidesException;
-import ge.tbc.testautomation.javaoop.figures.Circle;
-import ge.tbc.testautomation.javaoop.figures.Triangle;
+import ge.tbc.testautomation.annotationsAndStreams.Analyzable;
+import ge.tbc.testautomation.annotationsAndStreams.VariableNameAnnotation;
+
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
-
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
 
-        try {
-            Circle invalidCircle = new Circle(-3.7);
-        } catch (RadiusException e) {
-            System.out.println(e.getMessage());
+        List<Field> matchedFields = Arrays.stream(Analyzable.class.getDeclaredFields()).filter(
+                field -> {
+                    VariableNameAnnotation fieldAnnotation = field.getAnnotation(VariableNameAnnotation.class);
+                    return fieldAnnotation != null &&
+                            field.getName().equalsIgnoreCase(fieldAnnotation.name());
+                }
+        ).toList();
 
-        }
-        try {
-            Triangle invalidTriangle = new Triangle(-3.7, 5.1, 4, 2.2);
-        } catch (TriangleSidesException e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println("--------------");
-        Circle validCircle = new Circle(3.7);
-        Triangle validTriangle = new Triangle(3.7, 5.1, 4, 2.2);
+        List<Field> unmatchedFields = Arrays.stream(Analyzable.class.getDeclaredFields()).filter(
+                field -> {
+                    VariableNameAnnotation fieldAnnotation = field.getAnnotation(VariableNameAnnotation.class);
+                    return fieldAnnotation == null ||
+                            !field.getName().equalsIgnoreCase(fieldAnnotation.name());
+                }
+        ).toList();
+
+        System.out.println(matchedFields);
+        System.out.println(unmatchedFields);
+
+        //unused fields
+        String neverUsed = "HELLO";
+        int myAge = 25;
+        int[] salaries = {20000,123000,5000};
 
 
-        Triangle validTriangle2 = new Triangle(5.7, 5.1, 4, 3.2);
-        System.out.println(validTriangle2.getLength());
     }
 }
