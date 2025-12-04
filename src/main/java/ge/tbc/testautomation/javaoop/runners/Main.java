@@ -37,5 +37,6 @@ public class Main {
         int[] salaries = {20000,123000,5000};
 
 
+
     }
 }
